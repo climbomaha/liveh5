@@ -1,0 +1,9 @@
+export const AXIOS_CODE_SUCCESS = '1000';
+export const AXIOS_CODE_OTHER_LOGIN = '10007';
+export const AXIOS_CODE_OTHER_LOGIN_MSG = '您已在别处登录，请您修改密码或重新登录';
+export const AXIOS_CODE_TIMEOUT = '10008';
+export const AXIOS_CODE_TIMEOUT_MSG = '用户登录已经超时，请重新登录';
+export const AXIOS_CODE_NOT_LOGIN = '10009';
+export const AXIOS_CODE_NOT_LOGIN_MSG = '当前用户未登录，请前去登录';
+export const AXIOS_CODE_LOGOUT = '10013';
+export const AXIOS_CODE_LOGOUT_MSG = '当前用户已退出';
