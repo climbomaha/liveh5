@@ -11,12 +11,12 @@ interface ConfigProps {
 
 interface ResultProps {
     get: (url: string, params?: any) => Promise<any>;
-    post: (url: string, params: any) => Promise<any>;
+    post: (url: string, params: any, config?: any) => Promise<any>;
     put: (url: string, params: any) => Promise<any>;
     delete: (url: string, params?: any) => Promise<any>;
 }
-export default function axiosCreate(config: ConfigProps): ResultProps {
-    const { setLoading, disableAutoAddIndex } = config;
+export const axiosCreate = (config: ConfigProps): ResultProps => {
+    const { setLoading } = config;
     const thisAxios = axios.create();
     // 添加请求拦截器
     thisAxios.interceptors.request.use(function (config) {
@@ -56,33 +56,12 @@ export default function axiosCreate(config: ConfigProps): ResultProps {
         })
         return ret as Promise<any>;
     }
-
-
-    // let reAxios = (a: string, b: any) => {
-    //     return getRet(thisAxios.get(a, b))
-    // }
-
-    // Object.assign({}, {
-    //     get: (a: string, b: any) => {
-    //         return getRet(thisAxios.get(a, b))
-    //     },
-    //     post: (a: string, b: any) => {
-    //         return getRet(thisAxios.post(a, b))
-    //     },
-    //     put: (a: string, b: any) => {
-    //         return getRet(thisAxios.put(a, b))
-    //     },
-    //     delete: (a: string, b: any) => {
-    //         return getRet(thisAxios.delete(a, b))
-    //     }
-    // });
-
     return {
         get: (a: string, b?: any) => {
             return getRet(thisAxios.get(a, b))
         },
-        post: (a: string, b: any) => {
-            return getRet(thisAxios.post(a, b))
+        post: (a: string, b: any, c?: any) => {
+            return getRet(thisAxios.post(a, b, c))
         },
         put: (a: string, b: any) => {
             return getRet(thisAxios.put(a, b))
@@ -91,6 +70,4 @@ export default function axiosCreate(config: ConfigProps): ResultProps {
             return getRet(thisAxios.delete(a, b))
         }
     }
-    //return thisAxios
-
 }
