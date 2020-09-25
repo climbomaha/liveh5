@@ -28,7 +28,7 @@ export const remSet = () => {
     let recalc = () => {
         let clientWidth = docEl.clientWidth;
         if (!clientWidth) return;
-        docEl.style.fontSize = zoomRatio * 20 * (clientWidth / 375) + 'px';  /*计算出来的结果表示 1rem等于20px*/
+        docEl.style.fontSize = zoomRatio * 10 * (clientWidth / 375) + 'px';  /*计算出来的结果表示 1rem等于20px*/
     };
     if (!document.addEventListener) return;
     window.addEventListener(resizeEvt, recalc, false);
@@ -37,6 +37,7 @@ export const remSet = () => {
 
 export const remInit = () => {
     /*根据高清方案设置的rem*/
+    console.log(1)
     window.FR_GLOBAL_REM_DPR = true;
     const zoomRatio = getZoomRatio();
     let dpr, rem, scale;
@@ -51,7 +52,7 @@ export const remInit = () => {
 
     /* docEl.style.fontSize = 20 * (clientWidth / 375) + 'px'*/
 
-    rem = zoomRatio * clWidth * dpr * 20 / 375;
+    rem = zoomRatio * clWidth * dpr * 10 / 375;
 
     scale = 1 / dpr;
 

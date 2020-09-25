@@ -386,6 +386,10 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  ['import', {
+                    libraryName: 'zarm',
+                    style: true, // or 'css'
+                  }]
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/

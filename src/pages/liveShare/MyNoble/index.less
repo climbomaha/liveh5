@@ -1,0 +1,43 @@
+.___my_noble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // background-color: gray;
+  // gray
+  .za-tabs__line {
+    background-color: gray;
+    transform: scaleX(0.3);
+  }
+  .za-tabs__tab {
+    font-size: 15px;
+    color: gray;
+  }
+  .za-tabs--horizontal .za-tabs__header:after {
+    border-bottom: unset;
+  }
+  .za-tabs--horizontal.za-tabs--scroll .za-tabs__tab {
+    padding: 0 11px;
+  }
+  .za-tabs__tab--active {
+    position: relative;
+  }
+  .za-tabs__tab--active:after {
+    content: " ";
+    width: 20px;
+    height: 2px;
+    background: red;
+    position: absolute;
+    bottom: 0rem;
+    left: 50%;
+    transform: translateX(-50%); //居中处理
+  }
+  .za-tabs__line {
+    display: none;
+  }
+}
+
+.content {
+  width: 100px;
+}
