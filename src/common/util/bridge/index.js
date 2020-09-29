@@ -22,7 +22,7 @@
 
 import { ENV_IS_ADR } from '../env';
 
-
+let isAlert = window.location.href.includes('alert')
 let startBridge, frBridge, initBridgeReady;
 let count = 0;
 if(ENV_IS_ADR) {
@@ -31,24 +31,29 @@ if(ENV_IS_ADR) {
     frBridge = function (api, parameter, callback) {
         try {
             /*这里有可能和其他bridge方式混用，其他地方执行window.WebViewJavascriptBridge.init()，页面就会抛错*/
+            isAlert && alert(5)
             if(WebViewJavascriptBridgeNotInited) {
                 window.WebViewJavascriptBridge.init();
                 WebViewJavascriptBridgeNotInited = false;
             }
         }catch (e) {
-
+            isAlert && alert(6)
         }
-    
+        isAlert && alert(7)
         window.WebViewJavascriptBridge.callHandler(api, parameter, callback);
     };
     initBridgeReady = function () {
+        
         return new Promise(function (resolve, reject) {
             if (window.WebViewJavascriptBridge) {
+                isAlert && alert(1)
                 resolve();
             } else {
+                isAlert && alert(2)
                 document.addEventListener(
                     'WebViewJavascriptBridgeReady'
                     , function () {
+                        isAlert && alert(3)
                         resolve(window.WebViewJavascriptBridge);
                     },
                     false
@@ -59,9 +64,11 @@ if(ENV_IS_ADR) {
    startBridge = function (api, param) {
         return new Promise(function (resolve, reject) {
             initBridgeReady().then(() => {
+                isAlert && alert(4)
                 frBridge(api, param, function (ret) {
                     /* 在这里调用 console.log 似乎能减少出现获取环境超时的概率。。。*/
                     console.log(count++)
+                    isAlert && alert(8)
                     resolve(JSON.parse(ret))
                 });
             });
