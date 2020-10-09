@@ -14,12 +14,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route path="/" component={TestBridge} />
+        <Route path="/test" component={TestBridge} />
 
-        {/* <Route path="/live-share/card-share" component={CardShare} />
+        <Route path="/live-share/card-share" component={CardShare} />
         <Route path="/live-share/guess-price" component={GuessPrize} />
         <Route path="/live-share/my-level" component={MyLevel} />
-        <Route path="/live-share/my-noble" component={MyNoble} /> */}
+        <Route path="/live-share/my-noble" component={MyNoble} />
       </BrowserRouter>
     </div>
   );
