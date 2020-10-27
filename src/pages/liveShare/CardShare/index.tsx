@@ -5,12 +5,15 @@ import numPng from "./num.png";
 import { useState, useEffect } from "react";
 import { Tabs } from "zarm";
 import * as util from "../../../common/util";
+import { ENV_IS_WX } from "../../../common/util/env";
+import goPng from "./go.png";
 const axios = util.axiosCreate({ setLoading: () => {} });
 
 const CardShare = (props: any) => {
   let [location] = util.useUrl();
   let [detail, setDetail]: any = useState({});
 
+  let [goMask, setGoMask] = useState(false);
   useEffect(() => {
     axios
       .post(
@@ -30,9 +33,16 @@ const CardShare = (props: any) => {
       });
   }, []);
 
-  const { appUrl, coverUrl, nickName, title, watchCount } = detail;
+  const { appUrl, coverUrl, nickName, inviteCode, title, watchCount } = detail;
   return (
     <div className="$_cardshare">
+      {goMask && (
+        <div onClick={() => {
+          setGoMask(false)
+        }} className="gomask">
+          <img src={goPng} />
+        </div>
+      )}
       <div
         style={{
           backgroundImage: `url(${coverUrl})`,
@@ -65,7 +75,11 @@ const CardShare = (props: any) => {
         </div>
         <div
           onClick={() => {
-            window.location.href = appUrl;
+            if (ENV_IS_WX) {
+              setGoMask(true);
+            } else {
+              window.location.href = appUrl;
+            }
           }}
           style={{
             margin: "auto",
@@ -75,8 +89,17 @@ const CardShare = (props: any) => {
           没有下载？立即下载皮皮猴
         </div>
       </div>
-      <p className="code">邀请码：AU3H6</p>
-      <p className="tocopy">一键复制</p>
+      <p className="code">邀请码：{inviteCode || "-"}</p>
+      <p
+        onClick={() => {
+          util.copyText(inviteCode, () => {
+            alert("复制成功");
+          });
+        }}
+        className="tocopy"
+      >
+        一键复制
+      </p>
     </div>
   );
 };

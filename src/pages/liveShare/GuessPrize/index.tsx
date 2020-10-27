@@ -44,7 +44,13 @@ const GussPrice = (props: any) => {
               {item.used ? (
                 <p className="num_btn">已使用</p>
               ) : (
-                <p className="num_btn to_copy">复制</p>
+                <p className="num_btn to_copy"
+                onClick={() => {
+                  util.copyText(item.code, () => {
+                    alert('复制成功')
+                  })
+                }}
+                >复制</p>
               )}
             </div>
           );
