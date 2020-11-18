@@ -13,7 +13,7 @@ const GussPrice = (props: any) => {
   let [detail, setDetail]: any = useState({});
 
   useEffect(() => {
-    document.title = "我的等级";
+    document.title = "我的邀请码";
     axios
       .post(
         "/front/user/myInviteCode",
