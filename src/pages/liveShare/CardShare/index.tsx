@@ -33,7 +33,7 @@ const CardShare = (props: any) => {
       });
   }, []);
 
-  const { appUrl, coverUrl, nickName, inviteCode, title, watchCount } = detail;
+  const { appUrl, navUrl,coverUrl, nickName, inviteCode, title, watchCount } = detail;
   return (
     <div className="$_cardshare">
       {goMask && (
@@ -69,6 +69,13 @@ const CardShare = (props: any) => {
             margin: "auto",
             marginTop: "3.2rem",
             marginBottom: "1.7rem",
+          }}
+          onClick={() => {
+            if (ENV_IS_WX) {
+              setGoMask(true);
+            } else {
+              window.location.href = navUrl;
+            }
           }}
         >
           在APP中打开他的直播
