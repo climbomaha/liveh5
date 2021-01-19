@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./index.less";
 
 import numPng from "./num.png";
@@ -12,9 +12,22 @@ const axios = util.axiosCreate({ setLoading: () => {} });
 const CardShare = (props: any) => {
   let [location] = util.useUrl();
   let [detail, setDetail]: any = useState({});
+  let ctxref = useRef();
 
   let [goMask, setGoMask] = useState(false);
   useEffect(() => {
+    (window as any).ULink.start({
+      id: "usr1n35rk6ee2fe6" /* 平台为每个应用分配的方案link ID，必填 */,
+      data: {
+        roomId: location.query.roomId,
+        xinfo: location.query.xinfo,
+      } /* 自定义参数，选填 */,
+    }).ready(function (ctx) {
+      /* 初始化完成的回调函数 */
+      console.log('初始化成果', ctx)
+      ctxref.current = ctx;
+    });
+    
     axios
       .post(
         "/front/home/sharePage",
@@ -71,11 +84,17 @@ const CardShare = (props: any) => {
             marginBottom: "1.7rem",
           }}
           onClick={() => {
-            if (ENV_IS_WX) {
-              setGoMask(true);
+            if(ctxref.current) {
+              console.log('wakeup');
+              (ctxref.current as any).wakeup();
             } else {
-              window.location.href = navUrl;
+              alert('ULink start 失败')
             }
+            // if (ENV_IS_WX) {
+            //   setGoMask(true);
+            // } else {
+            //   window.location.href = navUrl;
+            // }
           }}
         >
           在APP中打开他的直播
