@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
-import bottom from "./img/bottom.jpg";
+import bottom from "./img/2.png";
 import * as util from "../../../common/util";
 
 const axios = util.axiosCreate({ setLoading: () => {} });
